@@ -48,7 +48,7 @@ service:
 
 # Grafana configuration for Prometheus as a data source
 datasources:
-  datasources.yaml:
+  datasources.yaml: |-
     apiVersion: 1
     datasources:
     - name: Mimir
@@ -58,7 +58,7 @@ datasources:
       access: proxy
       isDefault: true
 providers:
-  grafana-dashboards.yaml:
+  default-provider.yaml: |-
     apiVersion: 1
     providers:
     - name: 'RED Metrics (classic histogram)'
