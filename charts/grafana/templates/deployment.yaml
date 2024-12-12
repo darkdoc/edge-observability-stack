@@ -47,8 +47,11 @@ spec:
               value: "{{ .Values.adminPassword }}"
           volumeMounts:
             - name: config
-              mountPath: /etc/grafana/provisioning/datasources
-              
+              mountPath: /etc/grafana/provisioning/datasources/datasources.yaml
+              subPath: datasources.yaml
+            - name: config
+              mountPath: /etc/grafana/provisioning/dashboards/providers.yaml
+              subPath: providers.yaml
       volumes:
         - name: config
           configMap:

@@ -58,7 +58,7 @@ datasources:
       access: proxy
       isDefault: true
 providers:
-  default-provider.yaml: |-
+  providers.yaml: |-
     apiVersion: 1
     providers:
     - name: 'RED Metrics (classic histogram)'
