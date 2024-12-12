@@ -5,3 +5,27 @@ metadata:
 data:
 {{ toYaml .Values.datasources | nindent 2 }}
 {{ toYaml .Values.providers | nindent 2 }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "grafana.fullname" . }}-red-metrics-classic-dashboard
+data:
+  grafana-dashboard-red-metrics-classic.json: |
+{{ .Files.Get "conf/grafana-dashboard-red-metrics-classic.json" | indent 4 }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "grafana.fullname" . }}-red-metrics-native-dashboard
+data:
+  grafana-dashboard-red-metrics-native.json: |
+{{ .Files.Get "conf/grafana-dashboard-red-metrics-native.json" | indent 4 }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "grafana.fullname" . }}-jvm-metrics-dashboard
+data:
+  grafana-dashboard-jvm-metrics.json: |
+{{ .Files.Get "conf/grafana-dashboard-jvm-metrics.json" | indent 4 }}

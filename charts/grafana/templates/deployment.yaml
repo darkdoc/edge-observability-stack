@@ -39,7 +39,7 @@ spec:
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          
+
           env:
             - name: GF_SECURITY_ADMIN_USER
               value: "{{ .Values.adminUser }}"
@@ -52,10 +52,28 @@ spec:
             - name: config
               mountPath: /etc/grafana/provisioning/dashboards/providers.yaml
               subPath: providers.yaml
+            - name: red-metrics-classic-dashboard
+              mountPath: /otel-lgtm/grafana-dashboard-red-metrics-classic.json
+              subPath: grafana-dashboard-red-metrics-classic.json
+            - name: red-metrics-native-dashboard
+              mountPath: /otel-lgtm/grafana-dashboard-red-metrics-native.json
+              subPath: grafana-dashboard-red-metrics-native.json
+            - name: jvm-metrics-dashboard
+              mountPath: /otel-lgtm/grafana-dashboard-jvm-metrics.json
+              subPath: grafana-dashboard-jvm-metrics.json
       volumes:
         - name: config
           configMap:
             name: {{ include "grafana.fullname" . }}-config
+        - name: red-metrics-classic-dashboard
+          configMap:
+            name: {{ include "grafana.fullname" . }}-red-metrics-classic-dashboard
+        - name: red-metrics-native-dashboard
+          configMap:
+            name: {{ include "grafana.fullname" . }}-red-metrics-native-dashboard
+        - name: jvm-metrics-dashboard
+          configMap:
+            name: {{ include "grafana.fullname" . }}-jvm-metrics-dashboard
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
