@@ -69,6 +69,11 @@ providers:
       options:
         path: /otel-lgtm/grafana-dashboard-jvm-metrics.json
         foldersFromFilesStructure: false
+    - name: 'Host Metrics'
+      type: file
+      options:
+        path: /otel-lgtm/grafana-dashboard-host-metrics.json
+        foldersFromFilesStructure: false
 # Enable persistence for Grafana data (optional)
 persistence:
   enabled: true
