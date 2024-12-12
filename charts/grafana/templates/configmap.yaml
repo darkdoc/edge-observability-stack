@@ -3,7 +3,18 @@ kind: ConfigMap
 metadata:
   name: {{ include "grafana.fullname" . }}-config
 data:
+{{ if .Values.datasources }}
 {{ toYaml .Values.datasources | nindent 2 }}
+{{ else }}
+  datasources.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: Mimir
+      type: prometheus
+      url: "{{ .Values.mimirurl }}/prometheus" # Change this to your Prometheus service address
+      access: proxy
+      isDefault: true
+{{ end }}
 {{ toYaml .Values.providers | nindent 2 }}
 ---
 apiVersion: v1
